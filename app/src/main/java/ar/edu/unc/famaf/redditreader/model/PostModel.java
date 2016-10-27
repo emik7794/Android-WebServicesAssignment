@@ -9,7 +9,7 @@ public class PostModel {
     private String title;
     private String author;
     private String date;
-    private int comments;
+    private long comments;
     private String urlString;
 
     public String getTitle() {
@@ -36,11 +36,11 @@ public class PostModel {
         this.date = date;
     }
 
-    public int getComments() {
+    public long getComments() {
         return comments;
     }
 
-    public void setComments(int comments) {
+    public void setComments(long comments) {
         this.comments = comments;
     }
 
