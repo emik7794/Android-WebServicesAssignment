@@ -14,8 +14,6 @@ import ar.edu.unc.famaf.redditreader.model.Listing;
 import ar.edu.unc.famaf.redditreader.model.PostModel;
 
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
-
 
 
 public class Parser {
