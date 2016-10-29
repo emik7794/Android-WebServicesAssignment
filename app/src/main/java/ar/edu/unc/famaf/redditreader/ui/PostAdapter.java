@@ -103,24 +103,26 @@ public class PostAdapter extends ArrayAdapter<PostModel> {
         URL url = null;
         try {
             url = new URL(pm.getUrlString());
+
+            URL[] urlArray = new URL[1];
+            urlArray[0] = url;
+            new DownloadPreviewImageAsyncTask() {
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    super.onPostExecute(bitmap);
+                    viewHolder.progressBar.setVisibility(ProgressBar.GONE);
+                    if (bitmap != null) {
+                        viewHolder.asyncPreviewIV.setImageBitmap(bitmap);
+                    } else {
+                        viewHolder.asyncPreviewIV.setImageResource(R.drawable.reddit_icon);
+                    }
+
+                }
+            }.execute(urlArray);
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            viewHolder.asyncPreviewIV.setImageResource(R.drawable.reddit_icon);
         }
-        URL[] urlArray = new URL[1];
-        urlArray[0] = url;
-        new DownloadPreviewImageAsyncTask(){
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                super.onPostExecute(bitmap);
-                viewHolder.progressBar.setVisibility(ProgressBar.GONE);
-                if (bitmap != null) {
-                    viewHolder.asyncPreviewIV.setImageBitmap(bitmap);
-                } else {
-                    viewHolder.asyncPreviewIV.setImageResource(R.drawable.reddit_icon);
-                }
-
-            }
-        }.execute(urlArray);
 
         return convertView;
     }
